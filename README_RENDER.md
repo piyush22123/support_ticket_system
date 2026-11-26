@@ -14,7 +14,7 @@ This repository is a monorepo containing `backend/` (Express API) and `frontend/
 1. In Render, choose **New → Blueprint**.
 2. Connect `piyush22123/support_ticket_system` and select the branch containing `render.yaml`.
 3. Render reads the Blueprint and proposes two services:
-   - `support-ticket-api`: Node.js web service with root directory `backend`.
+   - `support-ticket-api`: Node.js web service on Render’s `free` compute plan with root directory `backend`.
    - `support-ticket-frontend`: static site with root directory `frontend`.
 4. For the API service, enter the Atlas URI as `MONGO_URI`.
 5. For the API service, set `FRONTEND_URL` to the exact frontend origin Render assigns, for example `https://support-ticket-frontend.onrender.com`. Do not add a trailing slash.
@@ -22,7 +22,7 @@ This repository is a monorepo containing `backend/` (Express API) and `frontend/
 7. Set `ADMIN_NAME`, `ADMIN_EMAIL` and `ADMIN_PASSWORD` for the API service if you want to seed the first admin during this deployment. Keep the password private.
 8. Deploy both services. If Render assigns a different frontend URL, update `FRONTEND_URL` in the API service and redeploy it.
 
-The Blueprint generates `JWT_SECRET` and enables secure cookies for production. The frontend's `VITE_API_URL` is a build-time variable, so redeploy the static site after changing it.
+The Blueprint explicitly sets the API to Render’s `free` compute plan, so it should not select a paid backend instance. The frontend static site is free. The Blueprint generates `JWT_SECRET` and enables secure cookies for production. The frontend's `VITE_API_URL` is a build-time variable, so redeploy the static site after changing it.
 
 ## Create the first admin
 
