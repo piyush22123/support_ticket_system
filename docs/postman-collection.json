@@ -1,0 +1,174 @@
+{
+  "info": {
+    "name": "Support Ticket Management API",
+    "_postman_id": "a7e41f92-8d8f-4a43-a125-2f2d7e8c4b10",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Test User\", \"email\": \"user@example.com\", \"password\": \"Password123\"}"
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"user@example.com\", \"password\": \"Password123\"}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Current user",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "Create ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Unable to access my account\", \"description\": \"I receive an error when I try to sign in to my account.\", \"category\": \"Account\", \"priority\": \"High\"}"
+            },
+            "url": "{{baseUrl}}/tickets"
+          }
+        },
+        {
+          "name": "List tickets",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tickets?page=1&limit=10"
+          }
+        },
+        {
+          "name": "Ticket details",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/tickets/TICKET_ID"
+          }
+        },
+        {
+          "name": "Add comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"message\": \"Here is the additional information.\"}"
+            },
+            "url": "{{baseUrl}}/tickets/TICKET_ID/comments"
+          }
+        },
+        {
+          "name": "Update ticket",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Updated title\", \"description\": \"Updated description for this support request.\", \"category\": \"Technical\"}"
+            },
+            "url": "{{baseUrl}}/tickets/TICKET_ID"
+          }
+        },
+        {
+          "name": "Delete ticket",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/tickets/TICKET_ID"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Dashboard stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/stats"
+          }
+        },
+        {
+          "name": "Update status and priority",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\": \"In Progress\", \"priority\": \"Urgent\"}"
+            },
+            "url": "{{baseUrl}}/admin/tickets/TICKET_ID"
+          }
+        }
+      ]
+    }
+  ]
+}
